@@ -18,7 +18,14 @@ exports.post_lead = function(req, res, next) {
 } 
 
 exports.leads = function(req, res, next) {
-    Lead.findAll().then(leads=>{
+    Lead.find().then(leads=>{
         res.render('index', { title: 'Express', leads: leads });
+    })
+}
+
+exports.show_lead = function(req, res, next) {
+    const query = req.params
+	Lead.findOne(query).then(leads=>{
+        res.render('lead', { title: 'Express', leads: leads });
     })
 }
