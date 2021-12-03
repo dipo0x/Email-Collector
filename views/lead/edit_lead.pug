@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+
+  form(action="/edit" method="POST") 
+    input(name="lead_email", type="email", placeholder="Enter your email bruh", value=leads.email)
+    button(type="submit") Save edit
+  
+  if title 
+    h1 title
