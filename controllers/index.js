@@ -47,3 +47,10 @@ exports.post_edit_lead = function(req, res, next) {
         res.redirect("/leads/" + id, { title: 'Saved', leads: leads });
     })
 }
+
+exports.delete_lead = function(req, res, next) {
+    const query = req.params;
+	Lead.findByIdAndRemove(query).then(leads=>{
+        res.redirect("/leads/");
+    })
+}

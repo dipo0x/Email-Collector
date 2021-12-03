@@ -5,3 +5,6 @@ block content
   p 
   span  #{leads.email}
   a(href=leads.id+"/edit") Edit
+  span  
+    form(action=leads.id+"/delete" method="POST") 
+    button(type="submit") Submit
