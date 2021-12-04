@@ -3,8 +3,10 @@ extends layout
 block content
   h1 Lead
   p 
+
   span  #{leads.email}
-  a(href=leads.id+"/edit") Edit
-  span  
-    form(action=leads.id+"/delete" method="POST") 
-    button(type="submit") Submit
+  |
+  a(href=leads.id+"/edit") Edit 
+  |
+  form(action="/leads/" + leads.id + "/delete" method="POST") 
+    button(type="submit") Delete

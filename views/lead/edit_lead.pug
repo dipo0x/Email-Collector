@@ -2,8 +2,8 @@ extends ../layout
 
 block content
 
-  form(action="/edit" method="POST") 
-    input(name="lead_email", type="email", placeholder="Enter your email bruh", value=leads.email)
+  form(action="/leads/" + id + "/edit/" method="POST") 
+    input(name="lead_email", type="email", placeholder="Enter your email bruh", value=email)
     button(type="submit") Save edit
   
   if title 

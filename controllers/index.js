@@ -5,12 +5,19 @@ exports.get_landing = function(req, res, next) {
 }
 
 exports.post_lead = function(req, res, next) {
+    const theEmail = req.body.lead_email
     try{
-        let author = new Lead({
-            email: req.body.lead_email
+        let lead = new Lead({
+            email: theEmail
         })
-        author.save()
-        res.redirect ('/leads');
+        filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (filter.test(theEmail)){
+            lead.save()
+            res.redirect ('/leads');
+        }
+        else{
+            res.render('index', { email: 'Not a valid email!' });
+        }
     }
     catch(err){
         console.log(err)
@@ -23,9 +30,9 @@ exports.leads = function(req, res, next) {
     })
 }
 
-exports.show_lead = function(req, res, next) {
-    const query = req.params;
-	Lead.findOne(query).then(leads=>{
+exports.show_lead = async function(req, res, next) {
+    const query = req.params.lead_id;
+	return Lead.findById(query).then(leads=>{
         res.render('lead', { title: 'Express', leads: leads });
     })
 }
@@ -33,24 +40,34 @@ exports.show_lead = function(req, res, next) {
 exports.edit_lead = function(req, res, next) {
     const query = req.params;
 	Lead.findOne(query).then(leads=>{
-        res.render('lead/edit_lead');
+        res.render('lead/edit_lead', {email: leads.email, id: leads.id});
     })
 }
 
 exports.post_edit_lead = function(req, res, next) {
     const id = req.params.lead_id
-    const email = req.params.lead_email
-
-	const lead = Lead.findOne(query)
-    lead.email = email
-    lead.email.save().then(leads=>{
-        res.redirect("/leads/" + id, { title: 'Saved', leads: leads });
+    const email = req.body.lead_email
+	const lead = Lead.findOne({
+        id: id
+    })
+    lead.updateOne({
+        email : email
+    }).then(leads=>{
+        res.redirect("/leads/" + id);
     })
 }
 
 exports.delete_lead = function(req, res, next) {
     const query = req.params;
-	Lead.findByIdAndRemove(query).then(leads=>{
-        res.redirect("/leads/");
+	Lead.find({ID : query}).deleteOne().then(
+        res.redirect("/leads/")
+)}
+
+exports.delete_lead_json = function(req, res, next) {
+    const query = req.params;
+    console.log(query)
+	Lead.find({ID : query}).deleteOne().then(result=>{
+
+        res.send({msg:"Success"})
     })
 }
