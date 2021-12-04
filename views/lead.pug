@@ -1,6 +1,9 @@
-extends layout
-
-block content
+doctype html 
+html(lang='en')
+  include common/head.pug 
+  +head("Starter MVP")
+  body
+  
   h1 Lead
   p 
 
@@ -10,3 +13,8 @@ block content
   |
   form(action="/leads/" + leads.id + "/delete" method="POST") 
     button(type="submit") Delete
+
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js')
+  script(src="/javascripts/lead.js") 
+  include common/footer.pug 
+    +footer()

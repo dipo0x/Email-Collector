@@ -38,8 +38,8 @@ exports.show_lead = async function(req, res, next) {
 }
 
 exports.edit_lead = function(req, res, next) {
-    const query = req.params;
-	Lead.findOne(query).then(leads=>{
+    const query = req.params.lead_id;
+	Lead.findById(query).then(leads=>{
         res.render('lead/edit_lead', {email: leads.email, id: leads.id});
     })
 }
@@ -47,9 +47,7 @@ exports.edit_lead = function(req, res, next) {
 exports.post_edit_lead = function(req, res, next) {
     const id = req.params.lead_id
     const email = req.body.lead_email
-	const lead = Lead.findOne({
-        id: id
-    })
+	const lead = Lead.findById(id)
     lead.updateOne({
         email : email
     }).then(leads=>{
@@ -65,9 +63,7 @@ exports.delete_lead = function(req, res, next) {
 
 exports.delete_lead_json = function(req, res, next) {
     const query = req.params;
-    console.log(query)
 	Lead.find({ID : query}).deleteOne().then(result=>{
-
         res.send({msg:"Success"})
     })
 }

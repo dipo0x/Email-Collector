@@ -1,24 +1,29 @@
-extends layout
+doctype html 
+html(lang='en')
+  include common/head.pug 
+  +head("Starter MVP")
 
-block content
-  if title
-    h1= title
-    p Welcome to #{title}
+  body
+    if title
+      h1= title
+      p Welcome to #{title}
 
-  form(action="/" method="POST") 
-    input(name="lead_email", type="text", placeholder="Enter your email bruh")
-    button(type="submit") Submit
-  if email
-    h3 #{email}
+    form(action="/" method="POST") 
+      input(name="lead_email", type="text", placeholder="Enter your email bruh")
+      button(type="submit") Submit
+    if email
+      h3 #{email}
 
-  if leads
-    h1 Leads
-    for lead in leads
-      p(id=lead.id)
-        span #{lead.email}  
-        |
-        a(href="/leads/" + lead.id) Details
-        |
-        button(onclick=`deleteLead('${lead.id}')`) Delete 
-  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js')
-  script(src="/javascripts/lead.js") 
+    if leads
+      h1 Leads
+      for lead in leads
+        p(id=lead.id)
+          span #{lead.email}  
+          |
+          a(href="/leads/" + lead.id) Details
+          |
+          button(onclick=`deleteLead('${lead.id}')`) Delete 
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js')
+    script(src="/javascripts/lead.js") 
+  include common/footer.pug 
+  +footer()
