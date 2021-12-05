@@ -11,7 +11,7 @@ var userData= new mongoose.Schema({
 		type: String,
 	},
 	firstName: {
-		type: String,
+		type: String, 
 	},
 	lastName: {
 		type: String,
