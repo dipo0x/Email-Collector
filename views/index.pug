@@ -4,6 +4,9 @@ html(lang='en')
   +head("Starter MVP")
 
   body
+    include common/navbar.pug 
+    +navbar ()
+
     if title
       h1= title
       p Welcome to #{title}

@@ -1,0 +1,18 @@
+doctype html 
+html(lang='en')
+  include ../common/head.pug 
+  title=title
+
+  body
+    include ../common/navbar.pug 
+    +navbar ()
+
+    form(action="/signup" method="POST") 
+      input(name="email", type="text", placeholder="Enter your email bruh")
+      input(name="password", type="password", placeholder="Enter your password broskii ❤️")
+      button(type="submit") Submit
+
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js')
+    script(src="/javascripts/lead.js") 
+  include ../common/footer.pug 
+  +footer()

@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 var landing = require('../controllers/index');
+var user = require('../controllers/user');
+
+router.get('/login', user.login);
+router.get('/signup', user.signup);
 
 router.get('/', landing.get_landing);
 router.post('/', landing.post_lead);
