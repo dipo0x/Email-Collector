@@ -1,4 +1,4 @@
-const userData = require('../models/user');
+const userData = require('./models/user');
 let LocalStrategy = require('passport-local').Strategy;
 let bcyrpt = require('bcrypt')
 
@@ -6,10 +6,11 @@ const validPassword = function(user, password){
     return bcyrpt.compareSync(password, user.password);
 }
 module.exports = function(passport){
-    passport.serializer(function(user, done){
+    passport.serializeUser(function(user, done){
         done(null, user.id)
     });
-    passport.deserializer(function(id, done){
+    passport.deserializeUser(function(id, done){
+        console.log(id)
         userData.findById({ id }).then(user=>{
             if (user == null){
                 done(new Error("Wrong user ID"))
@@ -38,7 +39,7 @@ module.exports = function(passport){
             }
             return done(null, user)
         }).catch(err => {
-            done(error, false)
+            done(err, false)
         })
     }))
 }    

@@ -6,6 +6,8 @@ var user = require('../controllers/user');
 
 router.get('/login', user.login);
 router.get('/signup', user.signup);
+router.post('/login', user.post_login);
+router.post('/signup', user.post_signup);
 
 router.get('/', landing.get_landing);
 router.post('/', landing.post_lead);

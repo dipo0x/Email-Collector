@@ -6,6 +6,7 @@ var logger = require('morgan');
 const DB = require('./config');
 const passport = require('passport');
 const session = require('express-session');
+let flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -27,7 +28,8 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({session: 'our secret key'}));
+app.use(flash());
+app.use(session({secret:'adesiyan1234'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
