@@ -29,7 +29,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(flash());
-app.use(session({secret:'adesiyan1234'}));
+app.use(session({secret:'adesiyan1234',
+                resave: true,
+                saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 

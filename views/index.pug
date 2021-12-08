@@ -11,6 +11,9 @@ html(lang='en')
       h1= title
       p Welcome to #{title}
 
+    if user
+      p Welcome back #{user}
+
     form(action="/" method="POST") 
       input(name="lead_email", type="text", placeholder="Enter your email bruh")
       button(type="submit") Submit

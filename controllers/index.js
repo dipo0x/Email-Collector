@@ -1,7 +1,7 @@
 const Lead = require('../models/lead')
 
 exports.get_landing = function(req, res, next) {
-    res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Express', user:req.user[0].email});
 }
 
 exports.post_lead = function(req, res, next) {
