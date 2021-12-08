@@ -9,8 +9,8 @@ html(lang='en')
 
     form(action="/signup" method="POST") 
       input(name="email", type="text", placeholder="Enter your email bruh❤️" value=emailErr )
-      if (errors.email)
-        p #{errors.email}
+      if (theErrors.email)
+        p #{errors.email, theErrors.email}
       input(name="password", type="password", placeholder="password broskii ❤️")
       if (errors.password)
         p #{errors.password}
