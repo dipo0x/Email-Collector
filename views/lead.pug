@@ -9,9 +9,9 @@ html(lang='en')
 
   span  #{leads.email}
   |
-  a(href=leads.id+"/edit") Edit 
+  a(href=id+"/edit") Edit 
   |
-  form(action="/leads/" + leads.id + "/delete" method="POST") 
+  form(action="/leads/" + id + "/delete" method="POST") 
     button(type="submit") Delete
 
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js')
