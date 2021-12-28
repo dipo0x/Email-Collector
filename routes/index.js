@@ -18,4 +18,9 @@ router.post('/leads/:lead_id/edit', landing.post_edit_lead);
 router.post('/leads/:lead_id/delete', landing.delete_lead);
 router.post('/leads/:lead_id/delete-json', landing.delete_lead_json);
 
+
+/////RESTFUL VERSION
+router.get('/api/leads', landing.api_leads);
+router.get('/api/leads/:lead_id', landing.api_show_lead);
+
 module.exports = router;

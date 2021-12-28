@@ -7,7 +7,6 @@ client.connect()
 client.on('connect', () => {
     console.log('Redis connected');
 });
-const DEFAULT_EXPIRATION = 120
 /////////REDIS END
 
 exports.get_landing = async function(req, res, next) {
@@ -59,8 +58,9 @@ exports.show_lead = async function(req, res, next){
             })})
         }else{
             res.render('lead', {leads: obj, id: req.params.lead_id});
-        }}
-    )}   
+        }
+    }
+)}   
 
 exports.edit_lead = async function(req, res, next) {
     client.HGETALL(req.params.lead_id).then(obj => {
@@ -103,3 +103,25 @@ exports.delete_lead_json = function(req, res, next) {
         res.send({msg:"Success"})
     })
 }
+
+
+////////API VERSION
+exports.api_leads = function(req, res, next) {
+    Lead.find().then(leads=>{
+        res.send(leads);
+    })
+}
+
+exports.api_show_lead = async function(req, res, next){
+    client.HGETALL(req.params.lead_id).then(obj => {
+        if (!obj.email){
+            Lead.findById(req.params.lead_id).then(leads=>{
+            client.hSet(req.params.lead_id, [
+                'email', leads.email
+            ]).then(()=>{
+                res.send(leads);
+            })})
+        }else{
+            res.send(obj);
+        }}
+    )}   
